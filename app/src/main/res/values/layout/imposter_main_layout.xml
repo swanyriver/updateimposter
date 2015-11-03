@@ -1,0 +1,34 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/container"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ImposterMainActivity"
+    tools:ignore="MergeRootFrame">
+
+
+
+    <TextView
+        android:visibility="visible"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="One of these is not like the others\nthey know who it is \ncan you find the Imposter"
+        android:layout_gravity="center_horizontal"
+        android:gravity="center"
+        android:id="@+id/readout"
+        />
+    <TextView
+        android:visibility="invisible"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TODO: ANIMATIONS, ARTWORK, GAME PARAMETERS: DIFFICULTY/LEVELS"
+        android:layout_gravity="center_horizontal|bottom"
+        />
+
+
+
+
+
+</FrameLayout>
+
+
