@@ -214,7 +214,7 @@ public class PIFrame extends FrameLayout {
 
         ///move origin point button
         Button myButton = new Button(context);
-        myButton.setText("Point");
+        myButton.setText("One Point");
         myButton.setLayoutParams(new LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
 
         myButton.setX(20);
@@ -241,7 +241,7 @@ public class PIFrame extends FrameLayout {
         myotherButton.setText("Many Points");
         myotherButton.setLayoutParams(new LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
 
-        myotherButton.setX(ViewTools.getWindowSize(context).x - 150);
+        myotherButton.setX(ViewTools.getWindowSize(context).x - 350);
         myotherButton.setY(ViewTools.getWindowSize(context).y - 220);
 
         myotherButton.setOnClickListener(new OnClickListener() {

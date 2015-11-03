@@ -138,14 +138,13 @@ public class drawFrame extends FrameLayout {
 
     private void makeLinesAndCurves(){
 
-        myWindyPath.generate(true,mRandom.nextInt(15)+1);
-
-
+        myWindyPath.generate(true,mRandom.nextInt(10)+6);
 
 
 
         Point LinePoints[]= myWindyPath.getLinePoints();
         int LineNumber = myWindyPath.getLineNumber();
+
 
         mLinePath.rewind();
         mLinePath.moveTo(LinePoints[0].x, LinePoints[0].y);

@@ -130,7 +130,7 @@ public class ImposterMainActivity extends Activity {
                     break;
                 case 2:
                     tmp = new TestFrames.PIFrame(master.getContext(),
-                            (TextView) findViewById(R.id.readout));
+                            new TextView(master.getContext()));
                     break;
                 case 3:
                     tmp = new PathFrame(master.getContext());

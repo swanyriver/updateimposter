@@ -117,7 +117,7 @@ public class PathFrame extends FrameLayout{
         myButton.setLayoutParams(new LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
 
         myButton.setX(300);
-        myButton.setY(1100);
+        myButton.setY(ViewTools.getWindowSize(context).y-220);
         myButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
