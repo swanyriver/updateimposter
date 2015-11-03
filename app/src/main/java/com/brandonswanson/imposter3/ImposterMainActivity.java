@@ -86,6 +86,7 @@ public class ImposterMainActivity extends Activity {
         private static final int SWIPE_THRESHOLD = 3500;
 
 
+
         public void setMaster(FrameLayout m){
             master = m;
             //index = 0
@@ -101,8 +102,8 @@ public class ImposterMainActivity extends Activity {
             //ViewTools.makeToast(master.getContext(), "Swipe detected:" + velocityX);
             Log.d("MOTION","swipe detected:"+velocityX);
 
-            if (velocityX < -SWIPE_THRESHOLD){
-                index = (index+index-1)%NUMFRAMES;
+            if (velocityX  < -SWIPE_THRESHOLD){
+                index = (index+NUMFRAMES-1)%NUMFRAMES;
                 setFrame();
             } else if (velocityX > SWIPE_THRESHOLD){
                 index = (index + 1)%NUMFRAMES;

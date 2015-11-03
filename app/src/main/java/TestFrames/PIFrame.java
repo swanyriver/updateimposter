@@ -218,7 +218,8 @@ public class PIFrame extends FrameLayout {
         myButton.setLayoutParams(new LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
 
         myButton.setX(20);
-        myButton.setY(1100);
+        myButton.setY(ViewTools.getWindowSize(context).y - myButton.getHeight() - 20);
+        //Point size = ViewTools.getWindowSize(context);
         myButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -240,24 +241,24 @@ public class PIFrame extends FrameLayout {
         myotherButton.setText("Many Points");
         myotherButton.setLayoutParams(new LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
 
-        myotherButton.setX(600);
-        myotherButton.setY(1100);
+        myotherButton.setX(ViewTools.getWindowSize(context).x - 20 - myButton.getWidth());
+        myotherButton.setY(ViewTools.getWindowSize(context).y - 20 - myButton.getHeight());
         myotherButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
                 mRandomPoint.clear();
-                for(int x=0;x<30;x++){
-                 mRandomPoint.add(radianMap.getPoint());
+                for (int x = 0; x < 30; x++) {
+                    mRandomPoint.add(radianMap.getPoint());
                 }
 
                 //debug
                 mRandomPoint.clear();
-                mRandomPoint=radianMap.getAllPoints();
+                mRandomPoint = radianMap.getAllPoints();
                 //
 
                 mPointPath.rewind();
-                for(int i=0;i<mRandomPoint.size();i++){
-                    mPointPath.makeLine(mCurrentPoint,mRandomPoint.get(i));
+                for (int i = 0; i < mRandomPoint.size(); i++) {
+                    mPointPath.makeLine(mCurrentPoint, mRandomPoint.get(i));
                 }
                 Myself.invalidate();
             }
@@ -319,7 +320,7 @@ public class PIFrame extends FrameLayout {
                 boolean lengthAllowed = ViewTools.lengthLessThanDistance(mCurrentPoint,new Point((int)x,(int)y), mMinLength);
 
                 if(inside && lengthAllowed){
-                    setOrigin(new Point((int)x,(int)y));
+                    setOrigin(new Point((int) x, (int) y));
                 }else {
 
                     touchOver();
