@@ -218,7 +218,7 @@ public class PIFrame extends FrameLayout {
         myButton.setLayoutParams(new LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
 
         myButton.setX(20);
-        myButton.setY(ViewTools.getWindowSize(context).y - myButton.getHeight() - 20);
+        myButton.setY(ViewTools.getWindowSize(context).y - 220);
         //Point size = ViewTools.getWindowSize(context);
         myButton.setOnClickListener(new OnClickListener() {
             @Override
@@ -241,8 +241,9 @@ public class PIFrame extends FrameLayout {
         myotherButton.setText("Many Points");
         myotherButton.setLayoutParams(new LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
 
-        myotherButton.setX(ViewTools.getWindowSize(context).x - 20 - myButton.getWidth());
-        myotherButton.setY(ViewTools.getWindowSize(context).y - 20 - myButton.getHeight());
+        myotherButton.setX(ViewTools.getWindowSize(context).x - 150);
+        myotherButton.setY(ViewTools.getWindowSize(context).y - 220);
+
         myotherButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {

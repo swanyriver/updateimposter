@@ -41,8 +41,10 @@ public class drawFrame extends FrameLayout {
 
     private Context mContext;
 
+    private boolean lines = false;
+
     //private int LineNumber = 8;
-    private int refreshrate=600*12;
+    private int refreshrate=600 * 4;
 
     private DecimalFormat myFormat = new DecimalFormat("#");
 
@@ -71,15 +73,17 @@ public class drawFrame extends FrameLayout {
 
 
         myButton = new Button(context);
-        myButton.setText("STOP");
+        myButton.setText("Line Visualization");
         myButton.setLayoutParams(new LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
 
-        myButton.setX(300);
-        myButton.setY(1100);
+        myButton.setX(20);
+        myButton.setY(ViewTools.getWindowSize(context).y-220);
         myButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                timer.cancel();
+                if (lines) lines=false;
+                else lines = true;
+
             }
         });
         addView(myButton);
@@ -94,7 +98,7 @@ public class drawFrame extends FrameLayout {
         Rect bounds=ViewTools.getWindowBounds(context);
 
 
-       bounds.inset(40,40);
+        bounds.inset(40,40);
 
 
         myWindyPath = new WindyPath(bounds,7);
@@ -140,14 +144,14 @@ public class drawFrame extends FrameLayout {
 
 
 
-        /*Point LinePoints[]= myWindyPath.getLinePoints();
+        Point LinePoints[]= myWindyPath.getLinePoints();
         int LineNumber = myWindyPath.getLineNumber();
 
         mLinePath.rewind();
         mLinePath.moveTo(LinePoints[0].x, LinePoints[0].y);
         for(int x=1;x<LineNumber+1;x++){
             mLinePath.lineTo(LinePoints[x].x, LinePoints[x].y);
-        }*/
+        }
 
 
         /*//TEMPORARY, REMOVE ANGLE LABELS
@@ -184,7 +188,7 @@ public class drawFrame extends FrameLayout {
     @Override
     protected void onDraw(Canvas canvas) {
 
-        //canvas.drawPath(mLinePath,mLinePaint);
+        if(lines) canvas.drawPath(mLinePath,mLinePaint);
         canvas.drawPath(myWindyPath,mCurvePaint);
 
 
