@@ -27,8 +27,7 @@ public abstract class oneFingerMoveListener implements View.OnTouchListener{
                 touchDown(event.getX(),event.getY());
 
 
-
-                break;
+                return true;
             case MotionEvent.ACTION_POINTER_DOWN:
 
                 //Log.d("touch","action pointer down");

@@ -1,25 +1,20 @@
 package com.brandonswanson.imposter3;
 
 import android.app.Activity;
-
-
 import android.graphics.Point;
 import android.graphics.Rect;
 import android.os.Bundle;
-
+import android.support.v4.view.GestureDetectorCompat;
 import android.util.Log;
+import android.view.GestureDetector;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.FrameLayout;
-import android.widget.TextView;
-
 
 import java.util.ArrayList;
 
-
 import SwansonLibrary.ViewTools;
 import SwansonLibrary.oneFingerMoveListener;
-import TestFrames.DoublePiFrame;
-import TestFrames.PathFrame;
 
 
 public class ImposterMainActivity extends Activity {
@@ -30,7 +25,7 @@ public class ImposterMainActivity extends Activity {
     private ArrayList<Face> mFaces;
     private BrainForImposter mBrain;
 
-
+    private GestureDetectorCompat mDetector;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,13 +35,20 @@ public class ImposterMainActivity extends Activity {
         //if (savedInstanceState == null) {}
 
         MasterLayout = (FrameLayout) findViewById(R.id.container);
-        MasterLayout.setClickable(true);
+        //MasterLayout.setClickable(true);
+
+        myGestureListener listener = new myGestureListener();
+        listener.setMaster(MasterLayout);
+        mDetector = new GestureDetectorCompat(this, listener);
 
 
 
         SetUp();
 
 
+        //FrameLayout piframe = new TestFrames.PIFrame(this,(TextView) findViewById(R.id.readout));
+        //piframe.setBackgroundColor(Color.BLACK);
+        //MasterLayout.addView(piframe);
 
 
         //Path Visualzation stuff///////////
@@ -64,6 +66,33 @@ public class ImposterMainActivity extends Activity {
 
         //Path Visualzation stuff///////////
         ///////////////////////////////////*/
+    }
+
+    @Override
+    public boolean onTouchEvent(MotionEvent event){
+        this.mDetector.onTouchEvent(event);
+        return super.onTouchEvent(event);
+    }
+
+    class myGestureListener extends GestureDetector.SimpleOnGestureListener{
+
+        private FrameLayout master;
+
+        public void setMaster(FrameLayout m){
+            master = m;
+        }
+
+        @Override
+        public boolean onDown(MotionEvent e) {
+            return true;
+        }
+
+        @Override
+        public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
+            ViewTools.makeToast(master.getContext(), "Swipe detected:" + velocityX);
+            Log.d("MOTION","swipe detected:"+velocityX);
+            return true;
+        }
     }
 
     private void SetUp() {
