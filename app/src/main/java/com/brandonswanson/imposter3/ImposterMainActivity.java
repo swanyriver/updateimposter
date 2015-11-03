@@ -1,6 +1,7 @@
 package com.brandonswanson.imposter3;
 
 import android.app.Activity;
+import android.graphics.Color;
 import android.graphics.Point;
 import android.graphics.Rect;
 import android.os.Bundle;
@@ -10,11 +11,13 @@ import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.FrameLayout;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 
 import SwansonLibrary.ViewTools;
 import SwansonLibrary.oneFingerMoveListener;
+import TestFrames.PathFrame;
 
 
 public class ImposterMainActivity extends Activity {
@@ -77,9 +80,13 @@ public class ImposterMainActivity extends Activity {
     class myGestureListener extends GestureDetector.SimpleOnGestureListener{
 
         private FrameLayout master;
+        private int index=0;
+        private static final int NUMFRAMES = 4;
+        private FrameLayout overframe = null;
 
         public void setMaster(FrameLayout m){
             master = m;
+            //index = 0
         }
 
         @Override
@@ -89,9 +96,50 @@ public class ImposterMainActivity extends Activity {
 
         @Override
         public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
-            ViewTools.makeToast(master.getContext(), "Swipe detected:" + velocityX);
+            //ViewTools.makeToast(master.getContext(), "Swipe detected:" + velocityX);
             Log.d("MOTION","swipe detected:"+velocityX);
+
+            if (velocityX < -5000){
+                index = (index+index-1)%NUMFRAMES;
+                setFrame();
+            } else if (velocityX > 5000){
+                index = (index + 1)%NUMFRAMES;
+                setFrame();
+            }
+
+
             return true;
+        }
+
+        private void setFrame(){
+
+            /*if (index==0){
+                if(overframe !=null) master.removeView(overframe);
+                overframe = null;
+                return;
+            }*/
+
+            FrameLayout tmp = null;
+
+            switch (index){
+                case 1:
+                    tmp = new TestFrames.drawFrame(master.getContext());
+                    break;
+                case 2:
+                    tmp = new TestFrames.PIFrame(master.getContext(),
+                            (TextView) findViewById(R.id.readout));
+                    break;
+                case 3:
+                    tmp = new PathFrame(master.getContext());
+                    break;
+            }
+
+            if (tmp !=null){
+                tmp.setBackgroundColor(Color.BLACK);
+                master.addView(tmp);
+            }
+            if(overframe !=null) master.removeView(overframe);
+            overframe=tmp;
         }
     }
 

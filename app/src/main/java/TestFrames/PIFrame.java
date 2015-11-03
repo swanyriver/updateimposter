@@ -373,7 +373,7 @@ public class PIFrame extends FrameLayout {
 
         };
 
-        setClickable(true);
+        //setClickable(true);
         setOnTouchListener(TouchDownListener);
 
     }
