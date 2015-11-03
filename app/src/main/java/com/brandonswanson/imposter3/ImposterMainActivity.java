@@ -83,7 +83,7 @@ public class ImposterMainActivity extends Activity {
         private int index=0;
         private static final int NUMFRAMES = 4;
         private FrameLayout overframe = null;
-        private static final int SWIPE_THRESHOLD = 3500;
+        private static final int SWIPE_THRESHOLD = 2500;
 
 
 
@@ -100,7 +100,7 @@ public class ImposterMainActivity extends Activity {
         @Override
         public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
             //ViewTools.makeToast(master.getContext(), "Swipe detected:" + velocityX);
-            Log.d("MOTION","swipe detected:"+velocityX);
+            Log.d("MOTIONed","swipe detected:"+velocityX);
 
             if (velocityX  < -SWIPE_THRESHOLD){
                 index = (index+NUMFRAMES-1)%NUMFRAMES;

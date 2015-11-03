@@ -1,8 +1,5 @@
 package TestFrames;
 
-import android.animation.Animator;
-import android.animation.AnimatorListenerAdapter;
-import android.animation.ValueAnimator;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -43,15 +40,11 @@ public class drawFrame extends FrameLayout {
 
     private boolean lines = false;
 
-    //private int LineNumber = 8;
-    private int refreshrate=600 * 4;
-
     private DecimalFormat myFormat = new DecimalFormat("#");
 
 
     private Button myButton;
 
-    private ValueAnimator timer;
     private final WindyPath myWindyPath;
 
 
@@ -77,16 +70,31 @@ public class drawFrame extends FrameLayout {
         myButton.setLayoutParams(new LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
 
         myButton.setX(20);
-        myButton.setY(ViewTools.getWindowSize(context).y-220);
+        myButton.setY(ViewTools.getWindowSize(context).y - 220);
         myButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (lines) lines=false;
+                if (lines) lines = false;
                 else lines = true;
+                Myself.invalidate();
 
             }
         });
         addView(myButton);
+
+        Button otherbutton = new Button(context);
+        otherbutton.setText("new path");
+        otherbutton.setLayoutParams(new LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+        otherbutton.setX(ViewTools.getWindowSize(context).x - 300);
+        otherbutton.setY(ViewTools.getWindowSize(context).y - 220);
+        otherbutton.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                makeLinesAndCurves();
+                Myself.invalidate();
+            }
+        });
+        addView(otherbutton);
 
         /*Rect bounds = new Rect();
         int margin = (1280-720-60)/2;
@@ -99,6 +107,7 @@ public class drawFrame extends FrameLayout {
 
 
         bounds.inset(40,40);
+        bounds.bottom -= 200;
 
 
         myWindyPath = new WindyPath(bounds,7);
@@ -107,29 +116,10 @@ public class drawFrame extends FrameLayout {
 
 
 
-        myWindyPath.generate();
+        //myWindyPath.generate();
+        makeLinesAndCurves();
         Myself.invalidate();
 
-
-
-        timer = new ValueAnimator().ofFloat(0,1);
-        timer.setRepeatCount(ValueAnimator.INFINITE);
-        timer.setDuration(refreshrate);
-        timer.addListener(new AnimatorListenerAdapter() {
-            @Override
-            public void onAnimationRepeat(Animator animation) {
-                super.onAnimationRepeat(animation);
-
-                //mLinePath.lineTo(randomGen.nextInt(700), randomGen.nextInt(1260));
-                //Log.d("PATH", "in repeat listener");
-                makeLinesAndCurves();
-                Myself.invalidate();
-
-
-            }
-        });
-        timer.start();
-        //setVisibility(INVISIBLE);
 
 
 
@@ -189,8 +179,6 @@ public class drawFrame extends FrameLayout {
 
         if(lines) canvas.drawPath(mLinePath,mLinePaint);
         canvas.drawPath(myWindyPath,mCurvePaint);
-
-
 
         //Log.d("PATH", "in on draw");
 
